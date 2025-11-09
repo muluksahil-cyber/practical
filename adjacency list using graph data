@@ -1,0 +1,74 @@
+#include <stdio.h> 
+#include <conio.h> 
+#include <alloc.h>  // for malloc() in Turbo C 
+// Structure for adjacency list node 
+struct Node 
+{ 
+int vertex; 
+struct Node *next; 
+}; 
+// Function to create a new node 
+struct Node* createNode(int v) 
+{ 
+struct Node *newNode; 
+newNode = (struct Node *)malloc(sizeof(struct Node)); 
+newNode->vertex = v; 
+newNode->next = NULL; 
+return newNode; 
+} 
+void main() 
+{ 
+struct Node *adjList[20]; // Array of pointers for adjacency list 
+struct Node *temp; 
+int vertices, edges; 
+int i, j, src, dest; 
+clrscr(); // Clear screen 
+printf("=== Create Graph using Adjacency List ===\n"); 
+printf("Enter number of vertices: "); 
+scanf("%d", &vertices); 
+// Initialize adjacency list to NULL 
+for (i = 0; i < vertices; i++) 
+{ 
+adjList[i] = NULL; 
+} 
+    printf("Enter number of edges: "); 
+    scanf("%d", &edges); 
+ 
+    printf("\nEnter edges (source destination):\n"); 
+    for (i = 0; i < edges; i++) 
+    { 
+        printf("Edge %d: ", i + 1); 
+        scanf("%d %d", &src, &dest); 
+ 
+        // Create node for destination vertex 
+        temp = createNode(dest); 
+        temp->next = adjList[src]; 
+        adjList[src] = temp; 
+ 
+        // (Optional) For undirected graph, add reverse edge 
+        // Uncomment this part if you want an undirected graph: 
+        /* 
+        temp = createNode(src); 
+        temp->next = adjList[dest]; 
+        adjList[dest] = temp; 
+        */ 
+    } 
+ 
+    // Display the adjacency list 
+    printf("\nAdjacency List Representation:\n"); 
+    for (i = 0; i < vertices; i++) 
+    { 
+        struct Node *ptr = adjList[i]; 
+        printf("Vertex %d: ", i); 
+        while (ptr != NULL) 
+        { 
+            printf("-> %d ", ptr->vertex); 
+            ptr = ptr->next; 
+        } 
+        printf("-> NULL\n"); 
+    } 
+ 
+    getch(); // Wait for keypress before exit 
+} 
+ 
+ 

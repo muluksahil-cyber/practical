@@ -1,0 +1,36 @@
+#include <stdio.h> 
+#include <conio.h> 
+void main() 
+{ 
+    int n, i, j; 
+    float salary[50], temp; 
+    clrscr(); // clear screen (Turbo C specific) 
+    printf("Enter the number of employees: "); 
+    scanf("%d", &n); 
+    printf("\nEnter the salaries of %d employees:\n", n); 
+    for (i = 0; i < n; i++) 
+    { 
+        printf("Salary [%d]: ", i + 1); 
+        scanf("%f", &salary[i]); 
+    } 
+ 
+    // Bubble Sort Algorithm 
+    for (i = 0; i < n - 1; i++) 
+    { 
+        for (j = 0; j < n - i - 1; j++) 
+        { 
+            if (salary[j] > salary[j + 1]) 
+            { 
+                temp = salary[j]; 
+                salary[j] = salary[j + 1]; 
+                salary[j + 1] = temp; 
+            } 
+        } 
+    } 
+    printf("\nSalaries in ascending order:\n"); 
+    for (i = 0; i < n; i++) 
+    { 
+        printf("%.2f\n", salary[i]); 
+    } 
+    getch(); // wait for key press before exit (Turbo C specific) 
+} 
